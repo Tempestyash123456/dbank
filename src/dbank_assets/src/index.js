@@ -1,11 +1,40 @@
 import { dbank } from "../../declarations/dbank";
 
-window.addEventListener("load", async function() {
-  // Initial update to display current balance
+window.addEventListener("load", async function () {
+  // Initial update to display current balance in the wallet section
   update();
+
+  // Hide all sections initially except the Profile section
+  showSection("profile-section");
 });
 
-document.querySelector("form").addEventListener("submit", async function(event) {
+// Add event listeners for navigation links
+document.getElementById("profile-link").addEventListener("click", function () {
+  showSection("profile-section");
+});
+
+document.getElementById("cart-link").addEventListener("click", function () {
+  showSection("cart-section");
+});
+
+document.getElementById("wallet-link").addEventListener("click", function () {
+  showSection("wallet-section");
+});
+
+document.getElementById("logout-link").addEventListener("click", function () {
+  showSection("logout-section");
+});
+
+// Function to show the selected section and hide others
+function showSection(sectionId) {
+  const sections = document.querySelectorAll(".content-section");
+  sections.forEach((section) => {
+    section.style.display = "none";
+  });
+  document.getElementById(sectionId).style.display = "block";
+}
+
+document.querySelector("form").addEventListener("submit", async function (event) {
   event.preventDefault(); // Prevent the default form submission
 
   const button = event.target.querySelector("#submit-btn");
